@@ -1,14 +1,26 @@
 'use client'
 
-import {TbPlaylist} from 'react-icons/tb'
-import {AiOutlinePlus} from 'react-icons/ai'
+import { TbPlaylist } from 'react-icons/tb'
+import { AiOutlinePlus } from 'react-icons/ai'
+import useAuthModal from '@/hooks/useAuthModal'
+import { useUser } from '@/hooks/useUser'
+import useUploadModal from '@/hooks/useUploadModal'
 
 const Libary = () => {
+    const authModal = useAuthModal()
+    const uploadModal = useUploadModal()
+    const { user } = useUser()
     const onClick = () => {
+        if(!user) {
+            return authModal.onOpen()
+        }
 
+        //TODO check for subsrciption
+
+        return uploadModal.onOpen()
     }
 
-    return ( 
+    return (
         <div className="flex flex-col">
             <div className="
             flex
@@ -22,7 +34,7 @@ const Libary = () => {
                 items-center
                 gap-x-2
                 ">
-                    <TbPlaylist className='text-neutral-400' size={26}/>
+                    <TbPlaylist className='text-neutral-400' size={26} />
                     <p className='
                     text-neutral-400
                     font-medium
@@ -31,10 +43,10 @@ const Libary = () => {
                         Your Libary
                     </p>
                 </div>
-                <AiOutlinePlus 
-                onClick={onClick}
-                size={20}
-                className='
+                <AiOutlinePlus
+                    onClick={onClick}
+                    size={20}
+                    className='
                 text-neutral-400
                 cursor-pointer
                 hover:text-white
@@ -52,7 +64,7 @@ const Libary = () => {
                 List Of Songs
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Libary;
