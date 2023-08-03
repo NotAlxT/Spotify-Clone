@@ -7,6 +7,7 @@ import { useUser } from '@/hooks/useUser'
 import useUploadModal from '@/hooks/useUploadModal'
 import MediaItem from './MediaItem'
 import { Song } from '@/types'
+import useOnPlay from '@/hooks/useOnPlay'
 
 interface LibaryProps {
     songs: Song[]
@@ -18,6 +19,9 @@ const Libary: React.FC<LibaryProps> = ({
     const authModal = useAuthModal()
     const uploadModal = useUploadModal()
     const { user } = useUser()
+
+    const onPlay = useOnPlay(songs)
+
     const onClick = () => {
         if(!user) {
             return authModal.onOpen()
@@ -71,7 +75,7 @@ const Libary: React.FC<LibaryProps> = ({
             '>
                 {songs.map((item) => (
                     <MediaItem
-                    onClick={()=> {}}
+                    onClick={(id: string) => onPlay(id)}
                     key={item.id}
                     data={item}
                     />
