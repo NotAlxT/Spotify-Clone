@@ -8,6 +8,7 @@ import useUploadModal from '@/hooks/useUploadModal'
 import MediaItem from './MediaItem'
 import { Song } from '@/types'
 import useOnPlay from '@/hooks/useOnPlay'
+import useSubscribeModal from '@/hooks/useSubscribeModal'
 
 interface LibaryProps {
     songs: Song[]
@@ -16,9 +17,10 @@ interface LibaryProps {
 const Libary: React.FC<LibaryProps> = ({
     songs
 }) => {
+    const subscribeModal= useSubscribeModal()
     const authModal = useAuthModal()
     const uploadModal = useUploadModal()
-    const { user } = useUser()
+    const { user, subscription } = useUser()
 
     const onPlay = useOnPlay(songs)
 
@@ -27,7 +29,9 @@ const Libary: React.FC<LibaryProps> = ({
             return authModal.onOpen()
         }
 
-        //TODO check for subsrciption
+        if (!subscription) {
+            return subscribeModal.onOpen()
+        }
 
         return uploadModal.onOpen()
     }
