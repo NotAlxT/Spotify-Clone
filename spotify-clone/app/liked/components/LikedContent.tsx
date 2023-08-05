@@ -27,7 +27,7 @@ const LikedContent: React.FC<LikedContentProps> = ({
         if (!isLoading && !user) {
             return authModal.onOpen()
         }
-    }, [isLoading, user, router])
+    }, [isLoading, user, router, authModal])
 
     if (songs.length === 0) {
         return (
