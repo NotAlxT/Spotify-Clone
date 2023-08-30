@@ -12,4 +12,4 @@ email: test@gmail.com
 password: test
 
 # Website url
-https://spotify-clone-alx-seven.vercel.app/
+https://spotifyclone-alx-seven.vercel.app/
